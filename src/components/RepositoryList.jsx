@@ -10,12 +10,12 @@ const repository = {
 }
 
 export default function RepositoryList() {
-    const [repos, setRepos] = useState([]);
+    const [repositories, setRepositories] = useState([]);
 
     useEffect(() => {
         fetch("https://api.github.com/users/wander-junior/repos")
             .then((response) => response.json())
-            .then((data) => setRepos(data))
+            .then((data) => setRepositories(data))
     }, [])
 
     return (
@@ -23,10 +23,9 @@ export default function RepositoryList() {
             <h1>Lista de repositórios</h1>
 
             <ul>
-                <RepositoryItem repository={repository} />
-                <RepositoryItem repository={repository} />
-                <RepositoryItem repository={repository} />
-                <RepositoryItem repository={repository} />
+                {repositories.map(repository => {
+                    return <RepositoryItem key={repository.id} repository={repository}/>
+                })}
             </ul>
         </section>
     )
